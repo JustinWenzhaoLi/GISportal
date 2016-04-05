@@ -1,14 +1,16 @@
 var request = require('superagent');
 var expect = require('expect.js');
 
-var boot = require('../app').boot;
-var shutdown = require('../app').shutdown;
-var port = require('../app').port;
-
 describe('Start server', function() {
+   
+   var boot = require('../app').boot;
+   var shutdown = require('../app').shutdown;
+   var port = require('../app').port;
+
    // first things first, start the application
    before(function(done) {
       boot();
+      // wait a second before trying to get any of the files; express needs a little warm up time
       setTimeout(done, 1000);
    });
 
