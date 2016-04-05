@@ -24,6 +24,52 @@ describe('Start server', function() {
       });
    });
 
+   // get the javscript
+   describe('GET /GISportal.js', function() {
+      it('respond with javascript', function(done) {
+         request
+            .get('http://localhost:' + port + '/GISportal.js')
+            .end(function(err, res) {
+               expect(res.status).to.equal(200);
+               done();
+            });
+      });
+   });   
+
+   describe('GET /GISportal.min.js', function() {
+      it('respond with minified javascript', function(done) {
+         request
+            .get('http://localhost:' + port + '/GISportal.min.js')
+            .end(function(err, res) {
+               expect(res.status).to.equal(200);
+               done();
+            });
+      });
+   });   
+
+   // get the CSS
+   describe('GET /css/GISportal.css', function() {
+      it('respond with css', function(done) {
+         request
+            .get('http://localhost:' + port + '/css/GISportal.css')
+            .end(function(err, res) {
+               expect(res.status).to.equal(200);
+               done();
+            });
+      });
+   });   
+
+   describe('GET /css/GISportal.min.css', function() {
+      it('respond with minified css', function(done) {
+         request
+            .get('http://localhost:' + port + '/css/GISportal.min.css')
+            .end(function(err, res) {
+               expect(res.status).to.equal(200);
+               done();
+            });
+      });
+   });   
+
    after(function(done) {
       shutdown();
       done();
