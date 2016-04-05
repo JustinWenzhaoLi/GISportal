@@ -123,21 +123,37 @@ app.use('/:subfolder', site_settings);
 app.use('/:subfolder', plotting);
 
 
-// Start listening...
+// Startup and shutdown functions
 server = http.createServer(app)
-server.listen(config.app.port, function() {
-	console.log('GISportal server listening on port %d', config.app.port)
-});
-io = io.listen(server);
 
-// the collaboration websocket stuff
-var collaboration = require('./app/lib/collaboration.js');
-collaboration.init(io, app, config);
+var boot = function() {
+   server.listen(config.app.port, function() {
+      console.log('GISportal server listening on port %d', config.app.port)
+   });
+   io = io.listen(server);
+
+   // the collaboration websocket stuff
+   var collaboration = require('./app/lib/collaboration.js');
+   collaboration.init(io, app, config);
+}
+
+var shutdown = function() {
+   server.close();
+}
+
+if (require.main === module) {
+   boot();
+} else {
+   console.info('Running app as module')
+   exports.boot = boot;
+   exports.shutdown = shutdown;
+   exports.port = config.app.port;
+}
+
 
 /*
  * Catch uncaught exceptions
  */
-
 app.on('uncaughtException', function(err){
   console.log('Exception: ' + err.stack);
 });
