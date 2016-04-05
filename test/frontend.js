@@ -31,6 +31,7 @@ describe('Start server', function() {
             .get('http://localhost:' + port + '/GISportal.js')
             .end(function(err, res) {
                expect(res.status).to.equal(200);
+               expect(res.type).to.equal('application/javascript');
                done();
             });
       });
@@ -42,6 +43,7 @@ describe('Start server', function() {
             .get('http://localhost:' + port + '/GISportal.min.js')
             .end(function(err, res) {
                expect(res.status).to.equal(200);
+               expect(res.type).to.equal('application/javascript');
                done();
             });
       });
@@ -54,6 +56,7 @@ describe('Start server', function() {
             .get('http://localhost:' + port + '/css/GISportal.css')
             .end(function(err, res) {
                expect(res.status).to.equal(200);
+               expect(res.type).to.equal('text/css');
                done();
             });
       });
@@ -65,6 +68,7 @@ describe('Start server', function() {
             .get('http://localhost:' + port + '/css/GISportal.min.css')
             .end(function(err, res) {
                expect(res.status).to.equal(200);
+               expect(res.type).to.equal('text/css');
                done();
             });
       });
