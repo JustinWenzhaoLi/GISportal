@@ -15,9 +15,9 @@ redis.startRedis = function(app, config) {
       .on('error', function(err) {
          console.log('Error connecting to redis %j', err);
       }).on('connect', function() {
-         console.log('Connected to redis.');
+         // no need to do anything
       }).on('ready', function() {
-         console.log('Redis client ready.');
+         // no need to do anything
       });
 
    return redisClient;
